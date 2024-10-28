@@ -7,7 +7,7 @@ export const databaseProviders = [
         provide: 'DATA_SOURCE',
 
         // Define una fábrica asíncrona que crea e inicializa un objeto DataSource
-        useFactory: async () => {
+        useFactory: async () => { 
             // Crea una nueva instancia de DataSource con la configuración especificada
             const dataSource = new DataSource({
                 type: 'mysql',                // Tipo de base de datos (MySQL)
