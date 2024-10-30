@@ -1,9 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateResenaDto } from './dto/create-resena.dto';
 import { UpdateResenaDto } from './dto/update-resena.dto';
+import { Repository } from 'typeorm';
+import { Resena } from './entities/resena.entity';
 
 @Injectable()
 export class ResenaService {
+  constructor(
+    @Inject('RESENA_REPOSITORY')
+    private resenaRepository: Repository<Resena>
+  ){}
   create(createResenaDto: CreateResenaDto) {
     return 'This action adds a new resena';
   }

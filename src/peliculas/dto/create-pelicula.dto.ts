@@ -1,4 +1,4 @@
-import { IsString,IsNumber } from "class-validator";
+import { IsString,IsNumber, IsArray } from "class-validator";
 export class CreatePeliculaDto {
     @IsString()
     titulo:string;
@@ -11,4 +11,14 @@ export class CreatePeliculaDto {
     
     @IsNumber()
     esteno:number;
+
+    @IsArray()
+    @IsString({ each: true }) //si saco el each:true funciona, pero no aparecen cuando pido las peliculas
+    directorIds: string[];
+
+    @IsArray()
+    @IsString({ each: true })
+    generoIds: string[];
+
+    
 }

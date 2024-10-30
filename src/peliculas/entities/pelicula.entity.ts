@@ -21,12 +21,12 @@ export class Pelicula {
     @Column()
     estreno: number;
 
-    @ManyToMany(() => Director, directores => directores.pelicula/*, {eager:true}*/)
-    directores: Director;
+    @ManyToMany(() => Director, (directores) => directores.pelicula, {eager:true})//si saco los eager:true el each de dTO y las relaciones del service
+    directores: Director[];
 
-    @ManyToMany(() => Genero, genero => genero.pelicula)
+    @ManyToMany(() => Genero, (genero) => genero.pelicula, {eager:true})
     generos: Genero[];
 
-    @OneToMany(() => Resena, resena => resena.pelicula)
+    @OneToMany(() => Resena, (resena) => resena.pelicula)
     resena: Resena[];
 }

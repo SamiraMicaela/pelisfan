@@ -6,7 +6,7 @@ export const databaseProviders = [
         // El proveedor se identifica por la cadena 'DATA_SOURCE'
         provide: 'DATA_SOURCE',
 
-        // Define una fábrica asíncrona que crea e inicializa un objeto DataSource
+        // Define una fábrica asíncrona que crea e inicializa un objeto DataSource 
         useFactory: async () => { 
             // Crea una nueva instancia de DataSource con la configuración especificada
             const dataSource = new DataSource({
