@@ -4,18 +4,21 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Usuario {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ type: 'varchar', length: 255 })
-    nombre: string;
+  @Column({ type: 'varchar', length: 255 })
+  nombre: string;
 
-    @Column({ type: 'varchar', length: 255, unique: true })
-    email: string;
+  @Column({ type: 'varchar', length: 255, unique: true })
+  email: string;
 
-      @OneToMany(() => Resena, (resena) => resena.usuario)
-      resena: Resena[];
+  @Column({ default: 'usuario' }) // Por defecto, el rol es 'usuario'
+  rol: string;
 
-    @OneToMany(() => ListaReproduccion, (lista) => lista.usuario)
-    listasReproduccion: ListaReproduccion[];
+  @OneToMany(() => Resena, (resena) => resena.usuario)
+  resena: Resena[];
+
+  @OneToMany(() => ListaReproduccion, (lista) => lista.usuario)
+  listasReproduccion: ListaReproduccion[];
 }

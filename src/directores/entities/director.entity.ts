@@ -14,7 +14,7 @@ export class Director {
     
     // relación uno a muchos: un director puede dirigir muchas películas
     @ManyToMany(()=> Pelicula, (pelicula)=> pelicula.directores)
-    pelicula: Pelicula;
+    pelicula: Pelicula[];
 
 
 }

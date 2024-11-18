@@ -19,16 +19,16 @@ export class GeneroController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.generoService.findOne(+id);
+    return this.generoService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateGeneroDto: UpdateGeneroDto) {
-    return this.generoService.update(+id, updateGeneroDto);
+    return this.generoService.update(id, updateGeneroDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.generoService.remove(+id);
+    return this.generoService.remove(id);
   }
 }

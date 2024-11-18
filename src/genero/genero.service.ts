@@ -16,21 +16,33 @@ export class GeneroService {
     return this.generoRepository.save(genero);
   }
 
-  async findAll():Promise<Genero[]> {
-    const genero= await this.generoRepository.find(/*{relations:[""]}*/) 
-    if(!genero.length)throw new NotFoundException(`This action returns all genero`)
-     return genero
+  async findAll(): Promise<Genero[]> {
+    const genero = await this.generoRepository.find(/*{relations:[""]}*/)
+    if (!genero.length) throw new NotFoundException(`This action returns all genero`)
+    return genero
+  }
+
+  async findOne(id: string): Promise<Genero> {
+    const genero = await this.generoRepository.findOne({ where: { id } });
+    if (!genero) throw new NotFoundException(`El género con ID ${id} no fue encontrado`);
+    return genero;
+  }
+
+  async update(id: string, updateGeneroDto: UpdateGeneroDto): Promise<Genero> {
+    const genero = await this.generoRepository.preload({
+      id,
+      ...updateGeneroDto
+    });
+    if (!genero) {
+      throw new NotFoundException(`Genero con ID ${id} no encontrado`);
     }
-
-  findOne(id: number) {
-    return `This action returns a #${id} genero`;
+    return this.generoRepository.save(genero);
   }
 
-  update(id: number, updateGeneroDto: UpdateGeneroDto) {
-    return `This action updates a #${id} genero`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} genero`;
+  async remove(id: string): Promise<void> {
+    const result = await this.generoRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Genero con ID ${id} no encontrado`);
+    }
   }
 }

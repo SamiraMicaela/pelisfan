@@ -1,7 +1,8 @@
+import { IsOptional } from "class-validator";
 import { Director } from "src/directores/entities/director.entity";
 import { Genero } from "src/genero/entities/genero.entity";
 import { Resena } from "src/resena/entities/resena.entity";
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -21,12 +22,20 @@ export class Pelicula {
     @Column()
     estreno: number;
 
-    @ManyToMany(() => Director, (directores) => directores.pelicula, {eager:true})//si saco los eager:true el each de dTO y las relaciones del service
+    @ManyToMany(() => Director, (director) => director.pelicula, { cascade: true })
+    @JoinTable()
     directores: Director[];
-
-    @ManyToMany(() => Genero, (genero) => genero.pelicula, {eager:true})
+ 
+    @ManyToMany(() => Genero, (genero) => genero.pelicula, { cascade: true })
+    @JoinTable()
     generos: Genero[];
 
     @OneToMany(() => Resena, (resena) => resena.pelicula)
     resena: Resena[];
+
+
+    
+    // @Column()
+    // url_imagen: string;
+    
 }

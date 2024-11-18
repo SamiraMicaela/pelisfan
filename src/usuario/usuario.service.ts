@@ -18,13 +18,15 @@ export class UsuarioService {
   }
 
   async findAll():Promise<Usuario[]> {
-    const usuarios= await this.usuarioRepository.find(/*{relations:[]]}*/) 
+    const usuarios= await this.usuarioRepository.find() 
     if(!usuarios.length)throw new NotFoundException(`This action returns all usuarios`)
      return usuarios
     }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
+  async findOne(id: string): Promise <Usuario> {
+    const usuario = await this.usuarioRepository.findOne({ where: { id } });
+    if (!usuario) throw new NotFoundException(`El usuario con ID ${id} no fue encontrado`);
+    return usuario;
   }
 
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {

@@ -5,6 +5,7 @@ import { In, Repository } from 'typeorm';
 import { Pelicula } from './entities/pelicula.entity';
 import { Director } from 'src/directores/entities/director.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
+import { directorProviders } from 'src/directores/providers/director.providers';
 
 @Injectable()
 export class PeliculasService {
@@ -23,24 +24,54 @@ export class PeliculasService {
   // }
 
   async create(createPeliculaDto: CreatePeliculaDto): Promise<Pelicula> {
-    const { directorIds, generoIds, ...data } = createPeliculaDto;
-    // creamos la película con el resto de los datos
-    const pelicula = this.peliculaRepository.create(data);
-    // asignamos los directores si existen
-    if (directorIds) {
-      pelicula.directores = await this.directorRepository.find({
-        where:{id: In(directorIds)}
-      });
-    }
-    // asignamos los generos si existen
-    if (generoIds) {
-      pelicula.generos = await this.generoRepository.find({
-        where:{id: In(generoIds)}//la condicion In de typeORM permite obtener las entidades de director y genero utilizando los ids pasados
-      });
-    }
+    // creamos la instancia de pelicula
+    const pelicula = this.peliculaRepository.create(createPeliculaDto);
 
-    return await this.peliculaRepository.save(pelicula);
-  }
+    // recuperamos los directores y generos utilizando el operador In
+    const directores = await this.directorRepository.find({
+        where: {
+            id: In(createPeliculaDto.directorIds),
+        },
+    });
+    const generos = await this.generoRepository.find({
+        where: { 
+            id: In(createPeliculaDto.generoIds),
+        },
+    });
+
+    // console.log('Directores encontrados:', directores);
+    // console.log('Géneros encontrados:', generos);
+
+    pelicula.directores = directores;
+    pelicula.generos = generos;
+
+    return this.peliculaRepository.save(pelicula);
+}
+
+  // async create(createPeliculaDto: CreatePeliculaDto): Promise<Pelicula> {
+  //   const { directorIds, generoIds, ...data } = createPeliculaDto;
+  //   // creamos la película con el resto de los datos
+  //   const pelicula = this.peliculaRepository.create(data);
+  //   // asignamos los directores si existen
+  //   if (directorIds) {
+  //     pelicula.directores = directorIds && directorIds.length
+  //       ? await this.directorRepository.find({
+  //         where: { id: In(directorIds) },//importamos la condicion IN de typeorm para poder acceder a otras entidades por sus ids
+  //       })
+  //       : []
+  //   }
+  //   // asignamos los generos si existen
+  //   if (generoIds) {
+  //     pelicula.generos = generoIds && generoIds.length
+  //       ? await this.generoRepository.find({
+  //         where: { id: In(generoIds) },
+  //       })
+  //       : [];
+  //   }
+  //   console.log('Datos de la película:', pelicula);
+  //   return await this.peliculaRepository.save(pelicula);
+
+  // }
 
 
   async findAll(): Promise<Pelicula[]> {
@@ -54,7 +85,7 @@ export class PeliculasService {
   async findOne(id: string): Promise<Pelicula> {
     const pelicula = await this.peliculaRepository.findOne({
       where: { id },
-      relations: ['directores', 'generos', 'resena'], // Agregamos las relaciones que queremos cargar
+      relations: ['directores', 'generos', 'resena'], // agregamos las relaciones que queremos cargar
     });//usamos findOne y pasamos el objeto {where:{id}} para especificar que estamos buscando por ID
     if (!pelicula) {
       throw new NotFoundException(`la pelicula con ID ${id}, no fue encontrada`); //si findOne no encuentra la pelicula, devuelve null. En ese caso, lanzamos una excepcion NotFoundException
@@ -75,4 +106,5 @@ export class PeliculasService {
     }
 
   }
+  
 }

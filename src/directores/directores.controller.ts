@@ -19,16 +19,16 @@ export class DirectoresController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.directoresService.findOne(+id);
+    return this.directoresService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDirectorDto: UpdateDirectorDto) {
-    return this.directoresService.update(+id, updateDirectorDto);
+    return this.directoresService.update(id, updateDirectorDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.directoresService.remove(+id);
+    return this.directoresService.remove(id);
   }
 }
