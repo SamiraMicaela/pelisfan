@@ -10,8 +10,14 @@ export class Usuario {
   @Column({ type: 'varchar', length: 255 })
   nombre: string;
 
+  @Column({ type: 'varchar', length: 64, unique: true })
+  userName: string;
+
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
+
+  @Column('varchar', { length: 60 })//bcrypt
+  password: string;
 
   @Column({ default: 'usuario' }) // Por defecto, el rol es 'usuario'
   rol: string;
