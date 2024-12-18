@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { LoginDto } from './dto/login.dto';
+import { UsuarioGuard } from './usuario.guard';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -13,6 +14,7 @@ export class UsuarioController {
     return this.usuarioService.register(createUsuarioDto);
   }
 
+  @UseGuards(UsuarioGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
   login(@Body() loginDto: LoginDto) {
@@ -31,11 +33,11 @@ export class UsuarioController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+    return this.usuarioService.update(id, updateUsuarioDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usuarioService.remove(+id);
+    return this.usuarioService.remove(id);
   }
 }
