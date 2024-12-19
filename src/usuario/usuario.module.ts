@@ -9,8 +9,8 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [JwtModule.register({
-    secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '3600s' },
+    secret: process.env.JWT_SECRET, // Aquí estamos usando la clave secreta desde el .env
+    signOptions: { expiresIn: process.env.JWT_EXPIRATION }, // Tiempo de expiración desde el .env
   }),
     DatabaseModule],
   controllers: [UsuarioController],

@@ -14,7 +14,7 @@ export class UsuarioController {
     return this.usuarioService.register(createUsuarioDto);
   }
 
-  @UseGuards(UsuarioGuard)
+  // @UseGuards(UsuarioGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
   login(@Body() loginDto: LoginDto) {
