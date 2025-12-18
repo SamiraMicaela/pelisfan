@@ -146,7 +146,7 @@ Podés adaptarlo y usarlo para tus propósitos sin restricciones.
 ## 📝 Contacto
 
 Si tenés dudas o querés colaborar:
-samira@example.com (opcional)
+micaelabava9@gmail.com
 
 ---
 
