@@ -61,3 +61,4 @@ Cloná el repositorio:
 ```bash
 git clone https://github.com/SamiraMicaela/pelisfan.git
 cd pelisfan
+
