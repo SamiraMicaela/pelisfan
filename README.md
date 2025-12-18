@@ -62,3 +62,92 @@ Cloná el repositorio:
 git clone https://github.com/SamiraMicaela/pelisfan.git
 cd pelisfan
 
+## 📦 Instalación
+
+Instalá dependencias:
+
+npm install
+
+---
+
+## ⚙️ Ejecución
+
+### 🧪 Modo desarrollo
+
+npm run start:dev
+
+### ▶️ Modo producción
+
+npm run start:prod
+
+La API quedará escuchando por defecto en:
+http://localhost:3000
+
+---
+
+## 🧪 Tests
+
+Para ejecutar los tests unitarios y de integración:
+
+npm run test
+
+Cobertura de tests:
+
+npm run test:cov
+
+---
+
+## 📌 Endpoints (ejemplos)
+
+Ejemplos de rutas que podría tener tu API (ajustá según tu implementación real)
+
+Método | Ruta | Descripción
+GET | /movies | Listar todas las películas
+GET | /movies/:id | Obtener detalles de una película
+GET | /movies/search?q= | Buscar películas
+POST | /movies | Agregar nueva película
+PUT | /movies/:id | Actualizar película
+DELETE | /movies/:id | Eliminar película
+
+---
+
+## 📁 Estructura del proyecto
+
+pelisfan/
+├─ src/
+│  ├─ modules/        # Módulos de dominio (películas, géneros, etc.)
+│  ├─ common/         # Pipes, filtros, guardias, DTOs globales
+│  ├─ main.ts         # Punto de entrada
+├─ test/              # Tests
+├─ .eslintrc.js       # Reglas de ESLint
+├─ tsconfig.json      # Configuración TypeScript
+├─ package.json
+└─ README.md
+
+---
+
+## 🤝 Cómo contribuir
+
+1. Hacé un fork del repositorio
+2. Creá una rama nueva con tu feature:
+   git checkout -b feature/nombre
+3. Hacé commits claros
+4. Abrí un Pull Request
+
+---
+
+## 🧾 Licencia
+
+Este proyecto está bajo la MIT License.
+Podés adaptarlo y usarlo para tus propósitos sin restricciones.
+
+---
+
+## 📝 Contacto
+
+Si tenés dudas o querés colaborar:
+samira@example.com (opcional)
+
+---
+
+✨ ¡Gracias por visitar PelisFan!
