@@ -5,7 +5,9 @@ import { usuarioProviders } from './providers/usuario.providers';
 import { DatabaseModule } from 'src/database/database.module';
 import { HashService } from './hash/hash.service';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
+import { AuthService } from './auth/auth.service';
+//import { JwtStrategy } from './auth/jwt.strategy/jwt.strategy';
+
 
 @Module({
   imports: [JwtModule.register({
@@ -14,7 +16,7 @@ import { JwtStrategy } from './jwt.strategy';
   }),
     DatabaseModule],
   controllers: [UsuarioController],
-  providers: [...usuarioProviders, UsuarioService, HashService, JwtStrategy],
+  providers: [...usuarioProviders, UsuarioService, HashService,AuthService],
   exports: [...usuarioProviders]
 })
 export class UsuarioModule { }

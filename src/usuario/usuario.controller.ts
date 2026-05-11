@@ -3,14 +3,14 @@ import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { LoginDto } from './dto/login.dto';
-import { UsuarioGuard } from './usuario.guard';
 
 @Controller('usuario')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) { }
+  constructor(
+    private readonly usuarioService: UsuarioService) { }
 
   @Post('register')
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+  register(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuarioService.register(createUsuarioDto);
   }
 

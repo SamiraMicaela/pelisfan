@@ -6,9 +6,9 @@ import { JwtAuthGuard } from './jwt-auth.guard/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService: AuthService){}
+  constructor(private readonly authService: AuthService) { }
 
-    @Post('register')
+  @Post('register')
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.authService.register(createUsuarioDto);
   }

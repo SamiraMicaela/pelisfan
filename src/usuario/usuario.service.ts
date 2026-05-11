@@ -3,6 +3,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -14,10 +15,14 @@ export class UsuarioService {
   ) { }
 
 
-  // async create(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
-  //   const usuario = this.usuarioRepository.create(createUsuarioDto)
-  //   return this.usuarioRepository.save(usuario);
-  // }
+  async register(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
+    const usuario = this.usuarioRepository.create(createUsuarioDto)
+    return this.usuarioRepository.save(usuario);
+  }
+ 
+  async login(loginDto: LoginDto) {
+
+  }
 
   async findAll(): Promise<Usuario[]> {
     const usuarios = await this.usuarioRepository.find()
